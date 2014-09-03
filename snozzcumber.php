@@ -36,10 +36,13 @@ class snozzcumber
 				return $method_information['report'];
 			} else {
 
-				if (  ) {
+				if ( $method_information['method']['type'] === "public" ) {
 
 				}
 
+				if ( $method_information['method']['type'] === "static" ) {
+
+				}
 			}
 
 		} else { 
