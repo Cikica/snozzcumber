@@ -1,42 +1,37 @@
 <?php
 
+	require 'help/test_class.php';
+	
 	class snozzcumber_test extends PHPUnit_Framework_TestCase
 	{
 		public function setUp ( )
-		{
+		{	
 			$this->map = array(
 				'test_class' => 'help/test_class.php',
 				'fake_test'  => '../help/test_class.php',
 			);
+
 		}
 
-		public function test_that_get_returns_information_about_an_invalid_file_path ()
+		public function test_that_get_calls_public_and_static_methods ()
 		{
-			$result = snozzcumber::make(array(	
+			$result = (array)json_decode( snozzcumber::make(array(	
 				'map'       => $this->map,
 				'requested' => array(
-					'class'      => 'fake_test',
-					'method'     => 'some',
-					'paramaters' => array( 'some', 'some' )
+					'class'      => 'test_class',
+					'method'     => 'get_some_public',
+					'paramaters' => array( 'text' => 'some' )
 				)
-			));
+			)) );
 
 			$this->assertEquals(
-				json_encode( array( 
-					"report" => array(
-						"error"   => true,
-						"message" => 'Invalid path : ../help/test_class.php for class fake_test',
-					)
-				) ),
-				$result
-			);
-
+				"get some get some",
+				$result['response']
+			);		
 		}
 
 		public function test_find_out_if_class_method_is_callable_and_if_not_why ()
-		{	
-			require $this->map['test_class'];
-
+		{
 			$result = snozzcumber::find_out_if_class_method_is_callable_and_if_not_why(array(
 				'path'   => $this->map['test_class'],
 				'name'   => 'some_stuff',

@@ -1,12 +1,10 @@
 <?php
-	
+
 class test_class
 {	
-	public  function get_some_public ( $with )
+	public function get_some_public ( $with )
 	{
-		return array(
-			'some' => $with['text'] . "some",
-		);
+		return "get {$with['text']} get {$with['text']}";
 	}
 
 	protected  function get_some_protected ( $with )

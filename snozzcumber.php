@@ -21,8 +21,27 @@ class snozzcumber
 
 	static function get ( $with )
 	{	
-		if ( file_exists( $with['path'] ) ) { 
-			// return 
+		if ( file_exists( $with['path'] ) ) {
+			
+			$method_information = snozzcumber::find_out_if_class_method_is_callable_and_if_not_why(array(
+				"path"   => $with['path'],
+				"name"   => $with['name'],
+				"method" => $with['method']
+			));
+
+			if (
+				$method_information['report']['error'] === true or 
+				$method_information['method']['valid'] === false
+			) {
+				return $method_information['report'];
+			} else {
+
+				if (  ) {
+
+				}
+
+			}
+
 		} else { 
 			return array(
 				"report" => array(
@@ -36,7 +55,7 @@ class snozzcumber
 	static function find_out_if_class_method_is_callable_and_if_not_why ( $with )
 	{
 		if ( class_exists( $with['name'] ) ) { 
-			
+
  			$reflection = new ReflectionClass($with['name']);
 
  			if ( $reflection->hasMethod( $with['method'] ) ) { 
