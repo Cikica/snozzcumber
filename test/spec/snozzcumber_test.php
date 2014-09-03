@@ -1,7 +1,7 @@
 <?php
 
 	require 'help/test_class.php';
-	
+
 	class snozzcumber_test extends PHPUnit_Framework_TestCase
 	{
 		public function setUp ( )
@@ -27,6 +27,20 @@
 			$this->assertEquals(
 				"get some get some",
 				$result['response']
+			);	
+
+			$result2 = (array)json_decode( snozzcumber::make(array(	
+				'map'       => $this->map,
+				'requested' => array(
+					'class'      => 'test_class',
+					'method'     => 'get_some_static',
+					'paramaters' => array( 'text' => 'static' )
+				)
+			)) );
+
+			$this->assertEquals(
+				"get static get static",
+				$result2['response']
 			);		
 		}
 

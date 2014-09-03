@@ -17,8 +17,6 @@ class test_class
 
 	static  function get_some_static ( $with )
 	{
-		return array(
-			'some' => $with['text'] . "some",
-		);
+		return "get {$with['text']} get {$with['text']}";
 	}
 }

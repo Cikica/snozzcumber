@@ -37,11 +37,22 @@ class snozzcumber
 			} else {
 
 				if ( $method_information['method']['type'] === "public" ) {
-
+					$class = new $with['name']();
+					return array(
+						'response' => call_user_func( 
+							array( $class, $with['method'] ), 
+							$with['paramaters'] 
+						)
+					);
 				}
 
 				if ( $method_information['method']['type'] === "static" ) {
-
+					return array(
+						'response' => call_user_func( 
+							array( $with['name'], $with['method'] ), 
+							$with['paramaters'] 
+						)
+					);
 				}
 			}
 
